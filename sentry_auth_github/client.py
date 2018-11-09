@@ -4,7 +4,9 @@ from requests.exceptions import RequestException
 from sentry import http
 from sentry.utils import json
 
-from .constants import API_DOMAIN
+from .constants import (
+    API_DOMAIN, API_SCHEMA
+)
 
 
 class GitHubApiError(Exception):
@@ -30,7 +32,7 @@ class GitHubClient(object):
         }
 
         try:
-            req = self.http.get('https://{0}/{1}'.format(API_DOMAIN, path.lstrip('/')),
+            req = self.http.get('{0}://{1}/{2}'.format(API_SCHEMA, API_DOMAIN, path.lstrip('/')),
                 params=params,
                 headers=headers,
             )

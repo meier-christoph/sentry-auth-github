@@ -27,5 +27,8 @@ DOMAIN = getattr(settings, 'GITHUB_DOMAIN', 'api.github.com')
 BASE_DOMAIN = getattr(settings, 'GITHUB_BASE_DOMAIN', 'github.com')
 API_DOMAIN = getattr(settings, 'GITHUB_API_DOMAIN', DOMAIN)
 
-ACCESS_TOKEN_URL = 'https://{0}/login/oauth/access_token'.format(BASE_DOMAIN)
-AUTHORIZE_URL = 'https://{0}/login/oauth/authorize'.format(BASE_DOMAIN)
+GITHUB_API_USE_HTTPS = getattr(settings, 'GITHUB_REQUIRE_VERIFIED_EMAIL', True)
+API_SCHEMA = "https" if GITHUB_API_USE_HTTPS else "http"
+
+ACCESS_TOKEN_URL = '{0}://{1}/login/oauth/access_token'.format(API_SCHEMA, BASE_DOMAIN)
+AUTHORIZE_URL = '{0}://{1}/login/oauth/authorize'.format(API_SCHEMA, BASE_DOMAIN)
