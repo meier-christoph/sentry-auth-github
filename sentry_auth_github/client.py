@@ -43,7 +43,7 @@ class GitHubClient(object):
         return json.loads(req.content)
 
     def get_org_list(self, access_token):
-        return self._request('/user/orgs', access_token)
+        return self._request('/user/orgs?per_page=1000', access_token)
 
     def get_user(self, access_token):
         return self._request('/user', access_token)
